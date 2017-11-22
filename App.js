@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { API_KEY, AUTH_DOMAIN, DATABASE_URL, STORAGE_BKT } from './secrets';
 import { StackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
-import Home from './component/Home';
-import Login from './component/Login';
-import CreateAcc from './component/CreateAcc';
+import { Tabs } from './routes'
 
 var config = {
   apiKey: API_KEY,
@@ -29,23 +27,22 @@ var database = firebase.database();
 //   }
 // }
 
-const App = StackNavigator({
-  Home: { screen: Home },
-  Login: { screen: Login },
-  CreateAcc: { screen: CreateAcc }
-});
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 200,
-  },
-  textLabel: {
-    fontSize: 20
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     marginTop: 200,
+//   },
+//   textLabel: {
+//     fontSize: 20
+//   }
+// });
+
+export default class App extends Component {
+  render() {
+    return <Tabs />;
   }
-});
-
-export default App;
+}

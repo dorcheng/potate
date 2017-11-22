@@ -1,13 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, ScrollView } from 'react-native';
 
 
-export default class CreateAcc extends React.Component {
+export default class Navbar extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Create Account</Text>
-      </View>
+      <ScrollView>
+        <Text>Navbar</Text>
+      </ScrollView>
     );
   }
 }
