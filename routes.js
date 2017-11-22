@@ -7,6 +7,7 @@ import Settings from './component/Settings'
 import SingleEvent from './component/SingleEvent'
 import Home from './component/Home'
 import Navbar from './component/Navbar'
+import AddEvent from './component/AddEvent'
 
 
 export const TimelineStack = StackNavigator({
@@ -26,7 +27,8 @@ export const TimelineStack = StackNavigator({
   SingleEvent: {
     screen: SingleEvent,
     navigationOptions: ({ navigation }) => ({
-      title: navigation.state.params.name,
+      // title: navigation.state.params.name,//undefined
+      title: 'Event',
       headerStyle: { backgroundColor: '#21152d'},
       headerTitleStyle: {
         color: '#6f637b',
@@ -35,15 +37,48 @@ export const TimelineStack = StackNavigator({
       },
       headerRight: (
         <TouchableOpacity
-          onPress={() => navigation.setParams({ mode: navigation.state.params.mode === 'edit' ? '' : 'edit' })}
+          onPress={() => navigation.navigate('DatePicker')}
           >
-          {navigation.state.params.mode === 'edit' ? (<View style={{ marginRight: 26 }}>
+          {/* onPress={() => navigation.setParams({ mode: navigation.state.params.mode === 'edit' ? '' : 'edit' })}
+          > */}
+          <View style={{ marginRight: 26 }}>
+            <Icon name="ios-create-outline" type="ionicon" size={24} color='#a59ab5'/>
+            <Text style={{ color: '#a59ab5' }} >Edit</Text>
+          </View>
+          {/* {navigation.state.params.mode === 'edit' ? (<View style={{ marginRight: 26 }}>
             <Icon name="ios-checkmark-circle-outline" type="ionicon" size={24} color='#f1e7f9'/>
             <Text style={{ color: '#f1e7f9' }}>Done</Text>
           </View>) : (<View style={{ marginRight: 26 }}>
             <Icon name="ios-create-outline" type="ionicon" size={24} color='#a59ab5'/>
             <Text style={{ color: '#a59ab5' }} >Edit</Text>
-          </View>)}
+          </View>)} */}
+        </TouchableOpacity>
+      ),
+      headerLeft: (
+        <TouchableOpacity onPress={() => navigation.navigate('Timeline')}>
+          <View style={{ marginLeft: 26 }}>
+            <Icon name="ios-arrow-back" type="ionicon" size={24} color='#a59ab5'/>
+          </View>
+        </TouchableOpacity>
+      )
+    })
+  },
+  DatePicker: {
+    screen: AddEvent,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Date',
+      headerStyle: { backgroundColor: '#21152d'},
+      headerTitleStyle: {
+        color: '#6f637b',
+      },
+      headerRight: (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('SingleEvent')}
+          >
+          <View style={{ marginRight: 26 }}>
+            <Icon name="ios-checkmark-circle-outline" type="ionicon" size={24} color='#f1e7f9'/>
+            <Text style={{ color: '#f1e7f9' }}>Done</Text>
+          </View>
         </TouchableOpacity>
       ),
       headerLeft: (
