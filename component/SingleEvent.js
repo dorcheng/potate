@@ -8,7 +8,7 @@ export default class SingleEvent extends React.Component {
     const { id, name, description, year, month, dayOfWeek, date } = this.props.navigation.state.params
 
     return (
-      <ScrollView>
+      <ScrollView style={{backgroundColor: '#252530'}}>
         <Tile
           title={name}
           caption={`Month ${month} 15, ${year}`}

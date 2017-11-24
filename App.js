@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { API_KEY, AUTH_DOMAIN, DATABASE_URL, STORAGE_BKT } from './secrets';
 import { StackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
-import { Tabs } from './routes'
+import { Tabs, Root } from './routes'
 
 var config = {
   apiKey: API_KEY,
@@ -43,6 +43,6 @@ var database = firebase.database();
 
 export default class App extends Component {
   render() {
-    return <Tabs />;
+    return <Root />;
   }
 }

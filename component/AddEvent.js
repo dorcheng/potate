@@ -1,46 +1,15 @@
-import React, { Component } from 'react'
-import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
-import { ScrollView } from 'react-native';
+import React from 'react';
+import { Text, ScrollView } from 'react-native';
+import DatePicker from './DatePicker'
 
-export default class MyDatePicker extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: ''
-    };
-    this.onDayPress = this.onDayPress.bind(this);
-  }
 
-  onDayPress(day) {
-    this.setState({
-      selected: day.dateString
-    });
-  }
-
-  render(){
+export default class AddEvent extends React.Component {
+  render() {
     return (
-      <ScrollView>
-        <Calendar
-          onDayPress={this.onDayPress}
-          hideExtraDays
-          hideArrows
-          disableMonthChange
-          markedDates={{[this.state.selected]: {selected: true}}}
-          monthFormat={'MMMM yyyy'}
-          firstDay={1}
-          theme={{
-            calendarBackground: '#0f051c',
-            selectedDayBackgroundColor: '#21152d',
-            selectedDayTextColor: '#f1e7f9',
-            todayTextColor: '#f1e7f9',
-            dayTextColor: '#a59ab5',
-            textMonthFontSize: 16,
-            monthTextColor: '#a59ab5',
-            textDayHeaderFontSize: 16,
-            textSectionTitleColor: '#f1e7f9',
-          }}
-        />
+      <ScrollView style={{backgroundColor: '#252530'}}>
+        <Text>Add Event</Text>
+        <DatePicker />
       </ScrollView>
-    )
+    );
   }
 }
