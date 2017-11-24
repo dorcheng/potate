@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList} from 'react-native';
-import { Icon, List, ListItem } from 'react-native-elements';
+import { Text, View, ScrollView, FlatList, Image} from 'react-native';
+import { Icon, List, ListItem, Badge} from 'react-native-elements';
 import fakeEvents from '../testData';
 
 
@@ -8,11 +8,17 @@ export default class Timeline extends Component {
   constructor(){
     super()
     this.onViewEvent.bind(this)
+    this.renderBadge.bind(this)
     this.renderSeparator.bind(this)
   }
 
   onViewEvent(evt) {
     this.props.navigation.navigate('SingleEvent', evt);
+  }
+
+  renderBadge(item){
+    const val = item.streak ? { value: 'NEW STREAK', textStyle: { color: '#ffde88'}, containerStyle: {marginTop:30} } : null
+    return val;
   }
 
   renderSeparator() {
@@ -58,14 +64,17 @@ export default class Timeline extends Component {
           renderItem={({item}) => (
             <ListItem
               noBorder
+              hideChevron
+              containerStyle={{ justifyContent: 'center', alignItems: 'center',backgroundColor: '#30303c', borderBottomWidth: 8, borderBottomColor: '#252530', height: 80}}
               avatar={
-                <View style={{justifyContent: 'center', alignItems: 'center', width: 65}}>
+                <View style={{width: 65, height: 80, justifyContent: 'center',
+                alignItems: 'center'}}>
                   <Text style={{fontSize: 20, color: '#ffde88', fontWeight: 'bold'}}>{item.dayOfWeek}</Text>
                 </View>
               }
-              title={`${item.month} ${item.date}, ${item.year}`}
+              badge={this.renderBadge(item)}
+              title={`${(item.month).slice(0,3)} ${item.date}, ${item.year}`}
               subtitle={item.description}
-              containerStyle={{ backgroundColor: '#30303c', borderBottomWidth: 8, borderBottomColor: '#252530'}}
               onPress={() => this.onViewEvent(item)}
               titleStyle={{color: '#92929e', fontSize: 16}}
               subtitleStyle={{color: '#AC9C90', fontSize: 16}}
@@ -83,3 +92,10 @@ export default class Timeline extends Component {
 // backgroundColor: "#252530",
 // marginLeft: "7%"
 // ItemSeparatorComponent={this.renderSeparator}
+              {/* avatar={
+                <View style={{justifyContent: 'center', alignItems: 'center', width: 65, height: 80}}>
+                  <Text style={{fontSize: 20, color: '#ffde88', fontWeight: 'bold'}}>{item.dayOfWeek}</Text>
+                </View>
+              } */}
+
+              // badge={{ value: 3, textStyle: { color: '#ffde88' }}}

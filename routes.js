@@ -20,6 +20,7 @@ export const TimelineStack = StackNavigator({
       headerTitleStyle: {
         color: '#73737f',
         fontSize: 18,
+        fontFamily: 'sans-serif-thin',
         alignSelf: 'center'
       },
       headerLeft: null
@@ -30,26 +31,27 @@ export const TimelineStack = StackNavigator({
     navigationOptions: ({ navigation }) => ({
       // title: navigation.state.params.name,//undefined
       title: 'Event',
-      headerStyle: { backgroundColor: '#364441'},
+      headerStyle: { backgroundColor: '#41414d'},
       headerTitleStyle: {
-        color: '#6f637b',
+        color: '#73737f',
         fontSize: 18,
-        fontFamily: 'sans-serif-thin'
+        fontFamily: 'sans-serif-thin',
+        alignSelf: 'center'
       },
       headerRight: (
         <TouchableOpacity
           onPress={() => navigation.navigate('AddEvent')}
           >
           <View style={{ marginRight: 26 }}>
-            <Icon name="ios-create-outline" type="ionicon" size={24} color='#a59ab5'/>
-            <Text style={{ color: '#a59ab5' }} >Edit</Text>
+            <Icon name="edit-3" type="feather" size={22} color='#73737f'/>
+            {/* <Text style={{ color: '#73737f' }} >Edit</Text> */}
           </View>
         </TouchableOpacity>
       ),
       headerLeft: (
         <TouchableOpacity onPress={() => navigation.navigate('Timeline')}>
           <View style={{ marginLeft: 26 }}>
-            <Icon name="ios-arrow-back" type="ionicon" size={24} color='#a59ab5'/>
+            <Icon name="arrow-left" type="feather" size={22} color='#73737f'/>
           </View>
         </TouchableOpacity>
       )

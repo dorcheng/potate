@@ -29,15 +29,15 @@ export default class DatePicker extends Component {
           monthFormat={'MMMM yyyy'}
           firstDay={1}
           theme={{
-            calendarBackground: '#0f051c',
-            selectedDayBackgroundColor: '#372a48',
-            selectedDayTextColor: '#f1e7f9',
-            todayTextColor: '#f1e7f9',
-            dayTextColor: '#a59ab5',
+            calendarBackground: '#30303c',
+            selectedDayBackgroundColor: '#ffde88',
+            selectedDayTextColor: '#282834',
+            todayTextColor: '#FEF0D0',
+            dayTextColor: '#92929e',
             textMonthFontSize: 16,
-            monthTextColor: '#a59ab5',
+            monthTextColor: '#92929e',
             textDayHeaderFontSize: 16,
-            textSectionTitleColor: '#f1e7f9',
+            textSectionTitleColor: '#AC9C90',
           }}
         />
       </ScrollView>
