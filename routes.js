@@ -1,7 +1,7 @@
 import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
-import { TouchableOpacity, View, Text } from 'react-native'
+import { TouchableOpacity, View, Text, Platform } from 'react-native'
 import Timeline from './component/Timeline'
 import Settings from './component/Settings'
 import SingleEvent from './component/SingleEvent'
@@ -14,35 +14,47 @@ import DatePicker from './component/DatePicker'
 export const TimelineStack = StackNavigator({
   Timeline: {
     screen: Timeline,
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       title: 'This Week',
-      headerStyle: { backgroundColor: '#41414d', },
+      headerStyle: { backgroundColor: '#41414d' },
       headerTitleStyle: {
         color: '#73737f',
         fontSize: 18,
-        fontFamily: 'sans-serif-thin',
-        alignSelf: 'center'
+        fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'sans-serif-thin',
+        alignSelf: 'center',
+        marginBottom: 15
       },
-      headerLeft: null
-    }
+      headerLeft: null,
+      headerRight: (
+        <TouchableOpacity
+        onPress={() => navigation.navigate('Timeline')}
+        >
+          <View style={{ marginRight: 26, marginBottom: 15 }}>
+            <Icon name="inbox" type="feather" size={22} color='#73737f'/>
+            {/* <Text style={{ color: '#73737f', fontSize: 10 }} >Archive</Text> */}
+          </View>
+        </TouchableOpacity>
+      )
+    })
   },
   SingleEvent: {
     screen: SingleEvent,
     navigationOptions: ({ navigation }) => ({
       // title: navigation.state.params.name,//undefined
       title: 'Event',
-      headerStyle: { backgroundColor: '#41414d'},
+      headerStyle: { backgroundColor: '#41414d' },
       headerTitleStyle: {
         color: '#73737f',
         fontSize: 18,
-        fontFamily: 'sans-serif-thin',
-        alignSelf: 'center'
+        fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'sans-serif-thin',
+        alignSelf: 'center',
+        marginBottom: 15
       },
       headerRight: (
         <TouchableOpacity
           onPress={() => navigation.navigate('AddEvent')}
           >
-          <View style={{ marginRight: 26 }}>
+          <View style={{ marginRight: 26, marginBottom: 15 }}>
             <Icon name="edit-3" type="feather" size={22} color='#73737f'/>
             {/* <Text style={{ color: '#73737f' }} >Edit</Text> */}
           </View>
@@ -50,67 +62,13 @@ export const TimelineStack = StackNavigator({
       ),
       headerLeft: (
         <TouchableOpacity onPress={() => navigation.navigate('Timeline')}>
-          <View style={{ marginLeft: 26 }}>
+          <View style={{ marginLeft: 26, marginBottom: 15}}>
             <Icon name="arrow-left" type="feather" size={22} color='#73737f'/>
           </View>
         </TouchableOpacity>
       )
     })
   },
-  // DatePicker: {
-  //   screen: DatePicker,
-  //   navigationOptions: ({ navigation }) => ({
-  //     title: 'Choose a date',
-  //     headerStyle: { backgroundColor: '#364441'},
-  //     headerTitleStyle: {
-  //       color: '#6f637b',
-  //     },
-  //     headerRight: (
-  //       <TouchableOpacity
-  //         onPress={() => navigation.navigate('AddEvent')}
-  //         >
-  //         <View style={{ marginRight: 26 }}>
-  //           <Icon name="ios-checkmark-circle-outline" type="ionicon" size={24} color='#f1e7f9'/>
-  //           <Text style={{ color: '#f1e7f9' }}>Done</Text>
-  //         </View>
-  //       </TouchableOpacity>
-  //     ),
-  //     headerLeft: (
-  //       <TouchableOpacity onPress={() => navigation.navigate('Timeline')}>
-  //         <View style={{ marginLeft: 26 }}>
-  //           <Icon name="ios-arrow-back" type="ionicon" size={24} color='#a59ab5'/>
-  //         </View>
-  //       </TouchableOpacity>
-  //     )
-  //   })
-  // },
-  // AddEvent: {
-  //   screen: AddEvent,
-  //   navigationOptions: ({ navigation }) => ({
-  //     title: 'Add a new event',
-  //     headerStyle: { backgroundColor: '#364441'},
-  //     headerTitleStyle: {
-  //       color: '#6f637b',
-  //     },
-  //     headerRight: (
-  //       <TouchableOpacity
-  //         onPress={() => navigation.navigate('DatePicker')}
-  //         >
-  //         <View style={{ marginRight: 26 }}>
-  //           <Icon name="ios-checkmark-circle-outline" type="ionicon" size={24} color='#f1e7f9'/>
-  //           <Text style={{ color: '#f1e7f9' }}>Done</Text>
-  //         </View>
-  //       </TouchableOpacity>
-  //     ),
-  //     headerLeft: (
-  //       <TouchableOpacity onPress={() => navigation.navigate('Timeline')}>
-  //         <View style={{ marginLeft: 26 }}>
-  //           <Icon name="ios-arrow-back" type="ionicon" size={24} color='#a59ab5'/>
-  //         </View>
-  //       </TouchableOpacity>
-  //     )
-  //   })
-  // }
 });
 
 // Tabs will show timeline tab (which will show TimelineStack) and settings tab
@@ -148,10 +106,6 @@ export const Tabs = TabNavigator({
       style: {
         backgroundColor: '#282834'
       },
-      // tabStyle: {
-      //   marginTop: 37,
-      //   marginBottom: 5,
-      // },
       indicatorStyle: {
         backgroundColor: '#ffde88'
       },

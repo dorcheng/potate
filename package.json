@@ -29,6 +29,9 @@
     "react-native-datepicker": "^1.6.0",
     "react-native-elements": "^0.18.2",
     "react-navigation": "^1.0.0-beta.19",
-    "redux": "^3.7.2"
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
   }
 }

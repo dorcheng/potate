@@ -17,5 +17,3 @@ export default class AddEvent extends React.Component {
     );
   }
 }
-
-// '#73737f'
