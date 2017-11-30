@@ -15,6 +15,7 @@ export default class DatePicker extends Component {
     this.setState({
       selected: day.dateString
     });
+    this.props.onSelectDay(day)
   }
 
   render(){
@@ -36,7 +37,7 @@ export default class DatePicker extends Component {
             dayTextColor: '#92929e',
             textMonthFontSize: 16,
             monthTextColor: '#92929e',
-            textDayHeaderFontSize: 16,
+            textDayHeaderFontSize: 14,
             textSectionTitleColor: '#AC9C90',
           }}
         />

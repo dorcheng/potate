@@ -10,7 +10,6 @@ class Timeline extends Component {
   constructor(props){
     super(props)
     this.state = {
-      events: this.props.events,
       width: 0,
       height: 0
     }
@@ -49,31 +48,32 @@ class Timeline extends Component {
     console.log("hello i am events", this.props.events)
     return (
       this.props.events.length > 0 ?
-      <List containerStyle={{ backgroundColor: '#30303c', borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0, marginBottom: 0}}>
-          <FlatList
-            data={this.state.events}
-            keyExtractor={item => item.id}
-            renderItem={({item}) => (
-              <ListItem
-                noBorder
-                hideChevron
-                containerStyle={{ justifyContent: 'center', alignItems: 'center',backgroundColor: '#30303c', borderBottomWidth: 8, borderBottomColor: '#252530', height: 80}}
-                avatar={
-                  <View style={{width: 65, height: 80, justifyContent: 'center',
-                  alignItems: 'center'}}>
-                    <Text style={{fontSize: 20, color: '#ffde88', fontWeight: 'bold'}}>{item.dayOfWeek}</Text>
-                  </View>
-                }
-                badge={this.renderBadge(item)}
-                title={`${(item.month).slice(0,3)} ${item.date}, ${item.year}`}
-                subtitle={item.description}
-                onPress={() => this.onViewEvent(item)}
-                titleStyle={{color: '#92929e', fontSize: 16}}
-                subtitleStyle={{color: '#AC9C90', fontSize: 16}}
-              />
-            )}
-          />
-      </List>
+      <ScrollView style={{backgroundColor: '#252530'}}>
+        <List containerStyle={{ backgroundColor: '#30303c', borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0, marginBottom: 0}}>
+            <FlatList
+              data={this.props.events}
+              keyExtractor={item => item.id}
+              renderItem={({item}) => (
+                <ListItem
+                  noBorder
+                  hideChevron
+                  containerStyle={{ justifyContent: 'center', alignItems: 'center',backgroundColor: '#30303c', borderBottomWidth: 8, borderBottomColor: '#252530', height: 80}}
+                  avatar={
+                    <View style={{width: 65, height: 80, justifyContent: 'center',
+                    alignItems: 'center'}}>
+                      <Text style={{fontSize: 20, color: '#ffde88', fontWeight: 'bold'}}>{item.dayOfWeek}</Text>
+                    </View>
+                  }
+                  badge={this.renderBadge(item)}
+                  subtitle={item.description}
+                  onPress={() => this.onViewEvent(item)}
+                  titleStyle={{color: '#92929e', fontSize: 16}}
+                  subtitleStyle={{color: '#AC9C90', fontSize: 16}}
+                />
+              )}
+            />
+        </List>
+      </ScrollView>
       :
       <ScrollView style={{backgroundColor: '#252530'}}>
         <View onLayout={(event) => {
@@ -104,3 +104,4 @@ const mapStateToProps = (state) => ({events: state.events})
 export default connect(mapStateToProps)(Timeline)
 
 // export default Timeline
+// title={`${(item.month)} ${(item.day)}, ${(item.year)}`}
