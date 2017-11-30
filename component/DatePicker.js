@@ -12,6 +12,7 @@ export default class DatePicker extends Component {
   }
 
   onDayPress(day) {
+    console.log('THIS IS DAY', new Date(day.dateString).getDay())
     this.setState({
       selected: day.dateString
     });

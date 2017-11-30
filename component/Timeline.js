@@ -61,7 +61,7 @@ class Timeline extends Component {
                   avatar={
                     <View style={{width: 65, height: 80, justifyContent: 'center',
                     alignItems: 'center'}}>
-                      <Text style={{fontSize: 20, color: '#ffde88', fontWeight: 'bold'}}>{item.dayOfWeek}</Text>
+                      <Text style={{fontSize: 20, color: '#ffde88', fontWeight: 'bold'}}>{item.dayOfWeek.toUpperCase()}</Text>
                     </View>
                   }
                   badge={this.renderBadge(item)}

@@ -17,7 +17,7 @@ class AddEvent extends React.Component {
       day: 0,
       month: 0,
       year: 0,
-      dayOfWeek: 'MON',
+      dayOfWeek: '',
       streak: false
     }
 
@@ -28,9 +28,11 @@ class AddEvent extends React.Component {
   }
 
   onSelectDay(selectedDay){
-    let id = Date.now()
-    const { day, month, year } = selectedDay
-    this.setState({day, month, year, id})
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    const id = Date.now()
+    const { day, month, year, dateString } = selectedDay
+    const dayOfWeek = days[new Date(dateString).getDay()]
+    this.setState({id, day, month, year, dayOfWeek})
   }
 
   onChangeName(name){
