@@ -6,9 +6,13 @@ export default class DatePicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: ''
+      selected: this.props.selected
     };
     this.onDayPress = this.onDayPress.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ selected: nextProps.selected });
   }
 
   onDayPress(day) {
@@ -20,6 +24,7 @@ export default class DatePicker extends Component {
   }
 
   render(){
+    console.log(this.state, 'wath is this state??')
     return (
       <ScrollView>
         <Calendar
