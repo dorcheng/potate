@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, ScrollView } from 'react-native';
 
 
-export default class Navbar extends React.Component {
+export default class Navbar extends Component {
   render() {
     return (
       <ScrollView>

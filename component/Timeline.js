@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, ScrollView, View, FlatList } from 'react-native';
 import { List, ListItem, Icon } from 'react-native-elements';
-import { getEvents } from '../reducers'
 import fakeEvents from '../testData';
+import { getEventsThunk } from '../reducers/events'
 
 
 class Timeline extends Component {
@@ -11,7 +11,7 @@ class Timeline extends Component {
     super(props)
     this.state = {
       width: 0,
-      height: 0
+      height: 0,
     }
     this.onViewEvent.bind(this)
     this.renderBadge.bind(this)
@@ -19,7 +19,7 @@ class Timeline extends Component {
   }
 
   componentDidMount() {
-    // get events from firebase -> this.props.loadEvents(events) which will dispatch the events from firebase to the store
+    this.props.loadEvents()
   }
 
   onViewEvent(evt) {
@@ -45,14 +45,14 @@ class Timeline extends Component {
   };
 
   render() {
-    console.log("hello i am events", this.props.events)
+    console.log('THIS IS THE STATE EVENTS', this.props.events)
     return (
       this.props.events.length > 0 ?
       <ScrollView style={{backgroundColor: '#252530'}}>
         <List containerStyle={{ backgroundColor: '#30303c', borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0, marginBottom: 0}}>
             <FlatList
               data={this.props.events}
-              keyExtractor={item => item.id}
+              keyExtractor={item => item.key}
               renderItem={({item}) => (
                 <ListItem
                   noBorder
@@ -90,18 +90,15 @@ class Timeline extends Component {
 
 const mapStateToProps = (state) => ({events: state.events})
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     setSingleEvent(evt) {
-//       dispatch(setEvent(evt))
-//     },
-//     // loadEvents(events){
-// 		// 	dispatch(getEvents(events))
-// 		// }
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadEvents(){
+      dispatch(getEventsThunk())
+		}
+  }
+}
 
-export default connect(mapStateToProps)(Timeline)
+export default connect(mapStateToProps, mapDispatchToProps)(Timeline)
 
 // export default Timeline
 // title={`${(item.month)} ${(item.day)}, ${(item.year)}`}

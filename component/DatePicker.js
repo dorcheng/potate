@@ -16,7 +16,6 @@ export default class DatePicker extends Component {
   }
 
   onDayPress(day) {
-    console.log('THIS IS DAY', new Date(day.dateString).getDay())
     this.setState({
       selected: day.dateString
     });
@@ -24,7 +23,6 @@ export default class DatePicker extends Component {
   }
 
   render(){
-    console.log(this.state, 'wath is this state??')
     return (
       <ScrollView>
         <Calendar

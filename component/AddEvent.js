@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Text, ScrollView, View} from 'react-native';
 import DatePicker from './DatePicker'
 import EventForm from './EventForm'
 import { addEvent } from '../reducers/events'
+import { writeEvent } from '../server/firebase'
 
 
-class AddEvent extends React.Component {
+class AddEvent extends Component {
   constructor(){
     super()
 
@@ -53,6 +54,8 @@ class AddEvent extends React.Component {
     this.props.handleAddEvent(this.state)
     this.props.navigation.navigate('Timeline');
     this.setState({dateString: '', day: 0})
+    const { name, description, day, month, year, dayOfWeek, dateString, streak } = this.state
+    writeEvent(name, description, day, month, year, dayOfWeek, dateString, streak)
   }
 
   render() {

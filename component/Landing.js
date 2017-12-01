@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-export default class Landing extends React.Component {
+export default class Landing extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
