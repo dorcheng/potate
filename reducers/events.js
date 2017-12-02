@@ -2,11 +2,11 @@ import { database } from '../server/firebase'
 
 // ACTION TYPES
 const LOAD_EVENTS = 'LOAD_EVENTS'
-const ADD_EVENT = 'ADD_EVENT'
+// const ADD_EVENT = 'ADD_EVENT'
 
 // ACTION CREATORS
 export const loadEvents = events => ({ type: LOAD_EVENTS, events })
-export const addEvent = event => ({ type: ADD_EVENT, event })
+// export const addEvent = event => ({ type: ADD_EVENT, event })
 
 //THUNKS
 function snapshotListToArray(snapshots){
@@ -31,6 +31,22 @@ dispatch => {
   })
 }
 
+// FIREBASE ACTIONS
+
+export function writeEvent(event) {
+  database.ref().child('events').push(event)
+
+  // const newEventKey = database.ref().child('events').push().key
+  // const updates = {}
+  // updates['/events/' + newEventKey] = event
+  // database.ref().update(updates)
+}
+
+export function updateEvent(newUpdate) {
+  const eventRef = database.ref(`events/${newUpdate.key}`)
+  eventRef.update(newUpdate)
+}
+
 /* REDUCER
 
 A reducer takes in a previous state & action, and returns a new state
@@ -44,9 +60,9 @@ export default function eventReducer (state = [], action) {
     case LOAD_EVENTS:
       return action.events
 
-    case ADD_EVENT:
-      // return Object.assign({}, state, { events: state.events.concat(action.event) })
-      return state.concat(action.event)
+    // case ADD_EVENT:
+    //   // return Object.assign({}, state, { events: state.events.concat(action.event) })
+    //   return state.concat(action.event)
 
     default:
       return state

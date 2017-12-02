@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 import { TouchableOpacity, View, Text, Platform } from 'react-native'
 import Timeline from './component/Timeline'
 import Settings from './component/Settings'
-import SingleEvent from './component/SingleEvent'
+import EditEvent from './component/EditEvent'
 import Home from './component/Home'
 import Navbar from './component/Navbar'
 import AddEvent from './component/AddEvent'
@@ -37,18 +37,18 @@ export const TimelineStack = StackNavigator({
       )
     })
   },
-  SingleEvent: {
-    screen: SingleEvent,
+  EditEvent: {
+    screen: EditEvent,
     navigationOptions: ({ navigation }) => ({
       // title: navigation.state.params.name,//undefined
-      title: 'Event',
+      title: 'Edit Potate',
       headerStyle: { backgroundColor: '#41414d' },
       headerTitleStyle: {
         color: '#73737f',
         fontSize: 18,
         fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'sans-serif-thin',
         alignSelf: 'center',
-        marginBottom: 15
+        marginBottom: 15,
       },
       headerRight: (
         <TouchableOpacity

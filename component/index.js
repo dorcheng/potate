@@ -3,7 +3,7 @@ import Landing from './Landing';
 import Login from './Login';
 import Timeline from './Timeline';
 import Settings from './Settings';
-import SingleEvent from './SingleEvent';
+import EditEvent from './EditEvent';
 
 export default {
   CreateAcc,
@@ -11,5 +11,5 @@ export default {
   Login,
   Timeline,
   Settings,
-  SingleEvent
+  EditEvent
 };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { KeyboardAvoidingView, Text } from 'react-native'
+import { KeyboardAvoidingView, Text, Picker } from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
 import { addEvent } from '../reducers/events'
 import { connect } from "react-redux"
@@ -8,15 +8,22 @@ export default class EventForm extends Component {
   constructor(props){
     super(props)
 
+    this.state = {
+      selectedType: this.props.selectedType
+    }
+
     this.onClick = this.onClick.bind(this)
     this.onWarning = this.onWarning.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ selectedType: nextProps.selectedType });
   }
 
   onClick(){
     this.nameInput.clearText()
     this.descriptionInput.clearText()
     this.props.onSubmit()
-    this.setState({selected: ''})
   }
 
   onWarning(){
@@ -33,11 +40,11 @@ export default class EventForm extends Component {
           inputStyle={{fontSize: 16}}
           onChangeText={(name) => this.props.onChangeName(name)}
           underlineColorAndroid="#ffde88"
-          selectionColor={'#ffde88'}
           tintColor={'#ffde88'}
           containerStyle={{marginLeft: 18}}
           placeholder="Enter name of event"
           placeholderTextColor={'#4F4B49'}
+          selectTextOnFocus={true}
         />
         <FormLabel labelStyle={{fontSize: 17, color: '#AC9C90'}}>Description</FormLabel>
         <FormInput
@@ -45,20 +52,25 @@ export default class EventForm extends Component {
           inputStyle={{fontSize: 16}}
           onChangeText={(description) => this.props.onChangeDescription(description)}
           underlineColorAndroid="#ffde88"
-          selectionColor={'#ffde88'}
           tintColor={'#ffde88'}
           containerStyle={{marginLeft: 18}}
           placeholder="Enter description of event"
           placeholderTextColor={'#4F4B49'}
+          selectTextOnFocus={true}
         />
         <FormLabel labelStyle={{fontSize: 17, color: '#AC9C90'}}>Type</FormLabel>
         <FormInput
           inputStyle={{fontSize: 16}}
           underlineColorAndroid="#ffde88"
-          selectionColor={'#ffde88'}
           tintColor={'#ffde88'}
           containerStyle={{marginLeft: 18}}
         />
+        {/* <Picker
+          selectedValue={this.state.selectedType}
+          onValueChange={(selectedVal) => this.props.onSelectType(selectedVal)}>
+          <Picker.Item label="Java" value="java" />
+          <Picker.Item label="JavaScript" value="js" />
+        </Picker> */}
           <Button
             small
             raised

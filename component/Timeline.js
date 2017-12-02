@@ -25,7 +25,7 @@ class Timeline extends Component {
   onViewEvent(evt) {
     // set event to the setEvent property on the redux state
     // this.props.setSingleEvent(evt)
-    this.props.navigation.navigate('SingleEvent', evt);
+    this.props.navigation.navigate('EditEvent', evt);
   }
 
   renderBadge(item){
@@ -45,7 +45,6 @@ class Timeline extends Component {
   };
 
   render() {
-    console.log('THIS IS THE STATE EVENTS', this.props.events)
     return (
       this.props.events.length > 0 ?
       <ScrollView style={{backgroundColor: '#252530'}}>
