@@ -9,6 +9,7 @@ import Home from './component/Home'
 import Navbar from './component/Navbar'
 import AddEvent from './component/AddEvent'
 import DatePicker from './component/DatePicker'
+import Login from './component/Login'
 
 
 export const TimelineStack = StackNavigator({
@@ -116,6 +117,9 @@ export const Tabs = TabNavigator({
 });
 
 export const Root = StackNavigator({
+  Login: {
+    screen: Login
+  },
   Top: {
     screen: Tabs,
     navigationOptions: ({ navigation }) => ({

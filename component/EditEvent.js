@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, KeyboardAvoidingView, View } from 'react-native';
 import { List, ListItem, Button } from 'react-native-elements'
 import DatePicker from './DatePicker'
-import { updateEvent } from '../reducers/events'
+import { updateEvent, deleteEvent } from '../reducers/events'
 
 
 export default class EditEvent extends Component {
@@ -25,10 +25,8 @@ export default class EditEvent extends Component {
     }
 
     this.onSelectDay = this.onSelectDay.bind(this)
-    this.onChangeName = this.onChangeName.bind(this)
-    this.onChangeDescription = this.onChangeDescription.bind(this)
-    this.onSelectType = this.onSelectType.bind(this)
     this.onSave = this.onSave.bind(this)
+    this.onDelete = this.onDelete.bind(this)
   }
 
   onSelectDay(selectedDay){
@@ -38,21 +36,14 @@ export default class EditEvent extends Component {
     this.setState({day, month, year, dayOfWeek, dateString})
   }
 
-  onChangeName(name){
-    this.setState({name})
-  }
-
-  onChangeDescription(description){
-    this.setState({description})
-  }
-
-  onSelectType(type){
-    this.setState({type})
-  }
-
   onSave(){
     updateEvent(this.state)
-    this.props.navigation.navigate('Timeline');
+    this.props.navigation.navigate('Timeline')
+  }
+
+  onDelete(){
+    deleteEvent(this.state)
+    this.props.navigation.navigate('Timeline')
   }
 
   render() {
@@ -72,7 +63,7 @@ export default class EditEvent extends Component {
               textInputValue={this.state.name}
               textInputStyle={{color: '#AC9C90', fontSize: 16, paddingTop: 0, paddingBottom: 0, textAlign: 'left'}}
               textInputMultiline={true}
-              textInputOnChangeText={this.onChangeName}
+              textInputOnChangeText={name => this.setState({name})}
               textInputSelectTextOnFocus={true}
               />
             <ListItem
@@ -84,7 +75,7 @@ export default class EditEvent extends Component {
               textInputValue={this.state.description}
               textInputStyle={{color: '#AC9C90', fontSize: 16, paddingTop: 0, paddingBottom: 0, textAlign: 'left'}}
               textInputMultiline={true}
-              textInputOnChangeText={this.onChangeDescription}
+              textInputOnChangeText={description => this.setState({description})}
             />
             <ListItem
               hideChevron
@@ -95,7 +86,7 @@ export default class EditEvent extends Component {
               textInputValue={this.state.type}
               textInputStyle={{color: '#AC9C90', fontSize: 16, paddingTop: 0, paddingBottom: 0, textAlign: 'left'}}
               textInputMultiline={true}
-              textInputOnChangeText={this.onSelectType}
+              textInputOnChangeText={type => this.setState({type})}
             />
           </List>
         </KeyboardAvoidingView>
@@ -122,6 +113,7 @@ export default class EditEvent extends Component {
             containerViewStyle={{marginTop: 25, width: 150, borderRadius: 30, alignSelf: 'center'}}
             buttonStyle={{height: 35}}
             title={'DELETE'}
+            onPress={this.onDelete}
           />
         </View>
       </ScrollView>

@@ -43,8 +43,11 @@ export function writeEvent(event) {
 }
 
 export function updateEvent(newUpdate) {
-  const eventRef = database.ref(`events/${newUpdate.key}`)
-  eventRef.update(newUpdate)
+  database.ref(`events/${newUpdate.key}`).update(newUpdate)
+}
+
+export function deleteEvent(eventToDelete){
+  database.ref(`events/${eventToDelete.key}`).remove();
 }
 
 /* REDUCER

@@ -45,18 +45,20 @@ class Timeline extends Component {
   };
 
   render() {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     return (
       this.props.events.length > 0 ?
       <ScrollView style={{backgroundColor: '#252530'}}>
         <List containerStyle={{ backgroundColor: '#30303c', borderTopWidth: 0, borderBottomWidth: 0, marginTop: 0, marginBottom: 0}}>
             <FlatList
+              containerStyle={{zIndex: 0}}
               data={this.props.events}
               keyExtractor={item => item.key}
               renderItem={({item}) => (
                 <ListItem
                   noBorder
                   hideChevron
-                  containerStyle={{ justifyContent: 'center', alignItems: 'center',backgroundColor: '#30303c', borderBottomWidth: 8, borderBottomColor: '#252530', height: 80}}
+                  containerStyle={{ justifyContent: 'center', alignItems: 'center',backgroundColor: '#30303c', borderBottomWidth: 9, borderBottomColor: '#252530', height: 90}}
                   avatar={
                     <View style={{width: 65, height: 80, justifyContent: 'center',
                     alignItems: 'center'}}>
@@ -64,7 +66,12 @@ class Timeline extends Component {
                     </View>
                   }
                   badge={this.renderBadge(item)}
-                  subtitle={item.description}
+                  subtitle={
+                    <View>
+                      <Text style={{color: '#AC9C90', marginBottom: 5, marginLeft: 5}}> {`${months[new Date(item.dateString).getMonth()]} ${new Date(item.dateString).getDate()}, ${new Date(item.dateString).getFullYear()}`}</Text>
+                      <Text style={{color: '#FEF0D0', marginLeft: 5}}>{item.description}</Text>
+                    </View>
+                    }
                   onPress={() => this.onViewEvent(item)}
                   titleStyle={{color: '#92929e', fontSize: 16}}
                   subtitleStyle={{color: '#AC9C90', fontSize: 16}}
