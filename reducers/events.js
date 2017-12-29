@@ -2,11 +2,9 @@ import { database } from '../server/firebase'
 
 // ACTION TYPES
 const LOAD_EVENTS = 'LOAD_EVENTS'
-// const ADD_EVENT = 'ADD_EVENT'
 
 // ACTION CREATORS
 export const loadEvents = events => ({ type: LOAD_EVENTS, events })
-// export const addEvent = event => ({ type: ADD_EVENT, event })
 
 //THUNKS
 function snapshotListToArray(snapshots){
@@ -20,9 +18,11 @@ function snapshotListToArray(snapshots){
   return resultArr
 }
 
-export const getEventsThunk = () =>
+export const getEventsThunk = (id) =>
 dispatch => {
-  database.ref('/events/').on('value', (snapshot) => {
+  console.log('trying to load events')
+  const eventsRef = database.ref('events').orderByChild('user').equalTo(id);
+  eventsRef.on('value', (snapshot) => {
     if(snapshot.val()) {
       dispatch(loadEvents(snapshotListToArray(snapshot)))
     } else {
@@ -33,13 +33,11 @@ dispatch => {
 
 // FIREBASE ACTIONS
 
-export function writeEvent(event) {
-  database.ref().child('events').push(event)
-
-  // const newEventKey = database.ref().child('events').push().key
-  // const updates = {}
-  // updates['/events/' + newEventKey] = event
-  // database.ref().update(updates)
+export function writeEvent(event, id) {
+  const eventRef = database.ref().child('events').push(event)
+  const eventKey = eventRef.key
+  eventRef.update({user: id})
+  database.ref(`users/${id}/events`).update({[eventKey]: true})
 }
 
 export function updateEvent(newUpdate) {
@@ -62,10 +60,6 @@ export default function eventReducer (state = [], action) {
 
     case LOAD_EVENTS:
       return action.events
-
-    // case ADD_EVENT:
-    //   // return Object.assign({}, state, { events: state.events.concat(action.event) })
-    //   return state.concat(action.event)
 
     default:
       return state

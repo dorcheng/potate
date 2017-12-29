@@ -47,8 +47,6 @@ export default class EditEvent extends Component {
   }
 
   render() {
-    console.log('EDIT EVENT', this.state)
-
     return (
       <ScrollView style={{backgroundColor: '#252530'}}>
         <DatePicker selected={this.state.dateString} onSelectDay={this.onSelectDay}/>

@@ -18,8 +18,10 @@ class Timeline extends Component {
     this.renderSeparator.bind(this)
   }
 
-  componentDidMount() {
-    this.props.loadEvents()
+  componentDidMount(){
+    if (this.props.info.events) {
+      this.props.loadEvents(this.props.info.key)
+    }
   }
 
   onViewEvent(evt) {
@@ -94,12 +96,12 @@ class Timeline extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({events: state.events})
+const mapStateToProps = (state) => ({events: state.events, info: state.info})
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadEvents(){
-      dispatch(getEventsThunk())
+    loadEvents(id){
+      dispatch(getEventsThunk(id))
 		}
   }
 }

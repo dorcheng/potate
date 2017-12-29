@@ -74,11 +74,11 @@ export const TimelineStack = StackNavigator({
 
 // Tabs will show timeline tab (which will show TimelineStack) and settings tab
 export const Tabs = TabNavigator({
-  Home: {
+  Stats: {
     screen: Home,
     navigationOptions: {
-      tabBarLabel: ({ focused }) => (focused ? 'Badges' : ''),
-      tabBarIcon: ({ tintColor }) => <Icon name="award" type="feather" size={18} color={ tintColor }/>
+      tabBarLabel: ({ focused }) => (focused ? 'Activity' : ''),
+      tabBarIcon: ({ tintColor }) => <Icon name="activity" type="feather" size={18} color={ tintColor }/>
     }
   },
   Timeline: {
@@ -116,9 +116,63 @@ export const Tabs = TabNavigator({
     },
 });
 
+// HomeTabs will show home tab (which will show TimelineStack) and settings tab
+export const HomeTabs = TabNavigator({
+  Badges: {
+    screen: Home,
+    navigationOptions: {
+      tabBarLabel: ({ focused }) => (focused ? 'Badges' : ''),
+      tabBarIcon: ({ tintColor }) => <Icon name="award" type="feather" size={18} color={ tintColor }/>
+    }
+  },
+  Leaderboard: {
+    screen: TimelineStack,
+    navigationOptions: {
+      tabBarLabel: ({ focused }) => (focused ? 'Leaderboard' : ''),
+      tabBarIcon: ({ tintColor }) => <Icon name="flag" type="feather" size={18} color={ tintColor }/>
+    }
+  },
+  Friends: {
+    screen: AddEvent,
+    navigationOptions: {
+      tabBarLabel: ({ focused }) => (focused ? 'Friends' : ''),
+      tabBarIcon: ({ tintColor }) => <Icon name="users" type="feather" size={18} color={ tintColor }/>
+    }
+  },
+  AddFriend: {
+    screen: AddEvent,
+    navigationOptions: {
+      tabBarLabel: ({ focused }) => (focused ? 'Add Friend' : ''),
+      tabBarIcon: ({ tintColor }) => <Icon name="user-plus" type="feather" size={18} color={ tintColor }/>
+    }
+  }
+}, {
+    tabBarPosition: 'top',
+    tabBarOptions: {
+      animationEnabled: true,
+      activeTintColor: '#FEF0D0',
+      inactiveTintColor: '#92929e',
+      upperCaseLabel: false,
+      showIcon: true,
+      showLabel: false,
+      style: {
+        backgroundColor: '#282834'
+      },
+      indicatorStyle: {
+        backgroundColor: '#ffde88'
+      },
+      labelStyle: {
+        fontSize: 12,
+      }
+    },
+});
+
 export const Root = StackNavigator({
   Login: {
-    screen: Login
+    screen: Login,
+    navigationOptions: {
+      header: null
+    }
   },
   Top: {
     screen: Tabs,
@@ -142,12 +196,40 @@ export const Root = StackNavigator({
         </TouchableOpacity>
       ),
       headerLeft: (
-        <TouchableOpacity onPress={() => navigation.navigate('Timeline')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <View style={{ marginLeft: 26 }}>
             <Icon name="short-text" type="material-icon" size={24} color='#92929e'/>
           </View>
         </TouchableOpacity>
       )
+    })
+  },
+  Home: {
+    screen: HomeTabs,
+    navigationOptions: ({ navigation }) => ({
+      // title: navigation.state.params.name,//undefined
+      header: (// custom header
+        <View style={{ backgroundColor:'#252530' }}>
+          <Home />
+        </View>
+      ),
+      // title: 'WELCOME',
+      // headerStyle: { backgroundColor:'#282834', height: 70, borderTopWidth: 30, borderTopColor:'#282834', elevation: 0, shadowOpacity: 0},
+      // headerTitleStyle: {
+      //   color: '#92929e',
+      //   fontSize: 18,
+      //   alignSelf: 'center',
+      // },
+      headerRight: (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Top')}
+          >
+          <View style={{ marginRight: 26, marginBottom: 15 }}>
+            <Icon name="arrow-right" type="feather" size={22} color='#73737f'/>
+          </View>
+        </TouchableOpacity>
+      ),
+      headerLeft: null
     })
   },
   Settings: {

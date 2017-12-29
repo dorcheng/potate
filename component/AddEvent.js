@@ -6,9 +6,9 @@ import EventForm from './EventForm'
 import { writeEvent } from '../reducers/events'
 
 
-export default class AddEvent extends Component {
-  constructor(){
-    super()
+class AddEvent extends Component {
+  constructor(props){
+    super(props)
 
     this.state = {
       name: '',
@@ -54,7 +54,7 @@ export default class AddEvent extends Component {
   }
 
   onSubmit(){
-    writeEvent(this.state)
+    writeEvent(this.state, this.props.user.uid)
     this.props.navigation.navigate('Timeline');
     this.setState({dateString: '', day: 0})
   }
@@ -71,3 +71,8 @@ export default class AddEvent extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({user: state.user})
+
+export default connect(mapStateToProps)(AddEvent)
+

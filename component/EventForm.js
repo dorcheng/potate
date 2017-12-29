@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { KeyboardAvoidingView, Text, Picker } from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
-import { addEvent } from '../reducers/events'
-import { connect } from "react-redux"
 
 export default class EventForm extends Component {
   constructor(props){
