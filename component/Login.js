@@ -194,7 +194,7 @@ class Login extends Component {
           />
           <Image
               style={{resizeMode: 'contain', width: 110, marginHorizontal: 15}}
-              source={require('../potato.png')}
+              source={require('../potato2x.png')}
             />
         </View>
       </ScrollView>

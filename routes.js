@@ -1,6 +1,6 @@
 import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import { Icon, Button } from 'react-native-elements';
 import { TouchableOpacity, View, Text, Platform } from 'react-native'
 import Timeline from './component/Timeline'
 import Settings from './component/Settings'
@@ -10,6 +10,7 @@ import Navbar from './component/Navbar'
 import AddEvent from './component/AddEvent'
 import DatePicker from './component/DatePicker'
 import Login from './component/Login'
+import UsersList from './component/UsersList'
 
 
 export const TimelineStack = StackNavigator({
@@ -26,16 +27,17 @@ export const TimelineStack = StackNavigator({
         marginBottom: 15
       },
       headerLeft: null,
-      headerRight: (
-        <TouchableOpacity
-        onPress={() => navigation.navigate('Timeline')}
-        >
-          <View style={{ marginRight: 26, marginBottom: 15 }}>
-            <Icon name="inbox" type="feather" size={22} color='#73737f'/>
-            {/* <Text style={{ color: '#73737f', fontSize: 10 }} >Archive</Text> */}
-          </View>
-        </TouchableOpacity>
-      )
+      headerRight: null
+      // (
+      //   <TouchableOpacity
+      //   onPress={() => navigation.navigate('Timeline')}
+      //   >
+      //     <View style={{ marginRight: 26, marginBottom: 15 }}>
+      //       <Icon name="inbox" type="feather" size={22} color='#73737f'/>
+      //       {/* <Text style={{ color: '#73737f', fontSize: 10 }} >Archive</Text> */}
+      //     </View>
+      //   </TouchableOpacity>
+      // )
     })
   },
   EditEvent: {
@@ -118,13 +120,13 @@ export const Tabs = TabNavigator({
 
 // HomeTabs will show home tab (which will show TimelineStack) and settings tab
 export const HomeTabs = TabNavigator({
-  Badges: {
-    screen: Home,
-    navigationOptions: {
-      tabBarLabel: ({ focused }) => (focused ? 'Badges' : ''),
-      tabBarIcon: ({ tintColor }) => <Icon name="award" type="feather" size={18} color={ tintColor }/>
-    }
-  },
+  // Badges: {
+  //   screen: Home,
+  //   navigationOptions: {
+  //     tabBarLabel: ({ focused }) => (focused ? 'Badges' : ''),
+  //     tabBarIcon: ({ tintColor }) => <Icon name="award" type="feather" size={18} color={ tintColor }/>
+  //   }
+  // },
   Leaderboard: {
     screen: TimelineStack,
     navigationOptions: {
@@ -132,18 +134,25 @@ export const HomeTabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <Icon name="flag" type="feather" size={18} color={ tintColor }/>
     }
   },
-  Friends: {
-    screen: AddEvent,
-    navigationOptions: {
-      tabBarLabel: ({ focused }) => (focused ? 'Friends' : ''),
-      tabBarIcon: ({ tintColor }) => <Icon name="users" type="feather" size={18} color={ tintColor }/>
-    }
-  },
+  // Friends: {
+  //   screen: AddEvent,
+  //   navigationOptions: {
+  //     tabBarLabel: ({ focused }) => (focused ? 'Friends' : ''),
+  //     tabBarIcon: ({ tintColor }) => <Icon name="users" type="feather" size={18} color={ tintColor }/>
+  //   }
+  // },
   AddFriend: {
-    screen: AddEvent,
+    screen: UsersList,
     navigationOptions: {
       tabBarLabel: ({ focused }) => (focused ? 'Add Friend' : ''),
       tabBarIcon: ({ tintColor }) => <Icon name="user-plus" type="feather" size={18} color={ tintColor }/>
+    }
+  },
+  Settings: {
+    screen: Settings,
+    navigationOptions: {
+      tabBarLabel: ({ focused }) => (focused ? 'Settings' : ''),
+      tabBarIcon: ({ tintColor }) => <Icon name="settings" type="feather" size={18} color={ tintColor }/>
     }
   }
 }, {
@@ -185,16 +194,18 @@ export const Root = StackNavigator({
         fontSize: 18,
         alignSelf: 'center',
       },
-      headerRight: (
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Settings')}
-          >
-          <View style={{ marginRight: 26 }}>
-            <Icon name="settings" type='feather' size={16} color='#92929e'/>
-            {/* <Text style={{ color: '#92929e' }} >Settings</Text> */}
-          </View>
-        </TouchableOpacity>
-      ),
+      headerRight: null
+      // (
+      //   <TouchableOpacity
+      //     onPress={() => navigation.navigate('Settings')}
+      //     >
+      //     <View style={{ marginRight: 26 }}>
+      //       <Icon name="settings" type='feather' size={16} color='#92929e'/>
+      //       {/* <Text style={{ color: '#92929e' }} >Settings</Text> */}
+      //     </View>
+      //   </TouchableOpacity>
+      // )
+      ,
       headerLeft: (
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <View style={{ marginLeft: 26 }}>
@@ -209,8 +220,20 @@ export const Root = StackNavigator({
     navigationOptions: ({ navigation }) => ({
       // title: navigation.state.params.name,//undefined
       header: (// custom header
-        <View style={{ backgroundColor:'#252530' }}>
+        <View style={{ backgroundColor:'#30303c' }}>
           <Home />
+          <Button
+            small
+            raised
+            iconRight={{name: 'emoticon-excited', type:'material-community', color:'#282834'}}
+            backgroundColor={'#ffde88'}
+            borderRadius={30}
+            textStyle={{color:'#282834', fontSize:16, fontWeight:'bold'}}
+            containerViewStyle={{marginTop: 8, marginBottom: 20, width: 160, borderRadius: 30, alignSelf: 'center'}}
+            buttonStyle={{height: 30}}
+            title={'POTATE'}
+            onPress={() => navigation.navigate('Top')}
+          />
         </View>
       ),
       // title: 'WELCOME',
@@ -232,7 +255,7 @@ export const Root = StackNavigator({
       headerLeft: null
     })
   },
-  Settings: {
-    screen: Settings
-  }
+  // Settings: {
+  //   screen: Settings
+  // }
 })

@@ -4,7 +4,7 @@ import { database } from '../server/firebase'
 const GET_USER_INFO = 'GET_USER_INFO'
 
 // ACTION CREATORS
-export const getUserInfo = user => ({ type: GET_USER_INFO, user })
+export const getUserInfo = info => ({ type: GET_USER_INFO, info })
 
 // THUNKS
 function snapshotToObject(snapshot){
@@ -31,12 +31,12 @@ A reducer takes in a previous state & action, and returns a new state
 It must be a pure function - instead of mutating the previous state, it should return a new object/state
 
 */
-export default function userReducer (state = {}, action) {
+export default function infoReducer (state = {}, action) {
 
     switch (action.type) {
 
       case GET_USER_INFO:
-        return action.user
+        return action.info
 
       default:
         return state
