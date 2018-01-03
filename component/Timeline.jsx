@@ -25,8 +25,6 @@ class Timeline extends Component {
   }
 
   onViewEvent(evt) {
-    // set event to the setEvent property on the redux state
-    // this.props.setSingleEvent(evt)
     this.props.navigation.navigate('EditEvent', evt);
   }
 
@@ -107,6 +105,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timeline)
-
-// export default Timeline
-// title={`${(item.month)} ${(item.day)}, ${(item.year)}`}

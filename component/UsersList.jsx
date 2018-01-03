@@ -13,20 +13,12 @@ class UsersList extends Component {
       width: 0,
       height: 0
     }
-    // this.onViewEvent.bind(this)
-    // this.renderBadge.bind(this)
     this.renderSeparator.bind(this)
   }
 
   componentDidMount(){
     this.props.loadUsers()
   }
-
-  // onViewEvent(evt) {
-  //   // set event to the setEvent property on the redux state
-  //   // this.props.setSingleEvent(evt)
-  //   this.props.navigation.navigate('EditEvent', evt);
-  // }
 
   renderSeparator() {
     return (
@@ -55,7 +47,6 @@ class UsersList extends Component {
               renderItem={({item}) => (
                 <ListItem
                   noBorder
-                  // hideChevron
                   containerStyle={{ justifyContent: 'center', alignItems: 'center',backgroundColor: '#30303c', borderBottomWidth: 9, borderBottomColor: '#252530', height: 90}}
                   avatar={
                     <View style={{width: 65, height: 80, justifyContent: 'center',
@@ -76,7 +67,6 @@ class UsersList extends Component {
                       <Text style={{color: '#FEF0D0', marginLeft: 5}}>{item.lastName}</Text>
                     </View>
                     }
-                  // onPress={() => this.onViewEvent(item)}
                   titleStyle={{color: '#92929e', fontSize: 16}}
                   subtitleStyle={{color: '#AC9C90', fontSize: 16}}
                 />
@@ -109,6 +99,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersList)
-
-// export default Timeline
-// title={`${(item.month)} ${(item.day)}, ${(item.year)}`}
