@@ -1,5 +1,8 @@
 node_modules/
 .expo/
+.eslintrc.json
+.watchmanconfig
+App.test.js
 npm-debug.*
 secrets.js
 server/

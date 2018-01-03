@@ -198,7 +198,7 @@ class Login extends Component {
             />
         </View>
       </ScrollView>
-    );
+    )
   }
 }
 
