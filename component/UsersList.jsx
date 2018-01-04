@@ -34,8 +34,6 @@ class UsersList extends Component {
   render() {
     const friends = this.props.info ? this.props.info.friends : null
     const users = this.props.users.length > 0 ? this.props.users.filter(user => user.key !== this.props.info.key) : null
-    console.log('THIS IS USERS FROM LIST', users)
-    console.log('friends', friends)
     return (
       users ?
       <ScrollView style={{backgroundColor: '#252530'}}>
@@ -51,7 +49,12 @@ class UsersList extends Component {
                   avatar={
                     <View style={{width: 65, height: 80, justifyContent: 'center',
                     alignItems: 'center'}}>
-                      <Text style={{fontSize: 20, color: '#ffde88', fontWeight: 'bold'}}>{item.firstName}</Text>
+                      <Icon
+                        name='user'
+                        color='#ffde88'
+                        type='feather'
+                        fontSize={12}
+                      />
                     </View>
                   }
                   rightIcon={friends && friends[item.key] ?

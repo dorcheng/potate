@@ -22,7 +22,7 @@ export const TimelineStack = StackNavigator({
         fontSize: 18,
         fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'sans-serif-thin',
         alignSelf: 'center',
-        marginBottom: 15
+        paddingBottom: 15
       },
       headerLeft: null,
       headerRight: null
@@ -129,7 +129,7 @@ export const HomeTabs = TabNavigator({
     screen: TimelineStack,
     navigationOptions: {
       tabBarLabel: ({ focused }) => (focused ? 'Leaderboard' : ''),
-      tabBarIcon: ({ tintColor }) => <Icon name="flag" type="feather" size={18} color={ tintColor }/>
+      tabBarIcon: ({ tintColor }) => <Icon name="award" type="feather" size={18} color={ tintColor }/>
     }
   },
   // Friends: {

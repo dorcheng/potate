@@ -20,7 +20,6 @@ function snapshotListToArray(snapshots){
 
 export const getEventsThunk = (id) =>
 dispatch => {
-  console.log('trying to load events')
   const eventsRef = database.ref('events').orderByChild('user').equalTo(id);
   eventsRef.on('value', (snapshot) => {
     if(snapshot.val()) {

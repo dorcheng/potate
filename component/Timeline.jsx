@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text, ScrollView, View, FlatList } from 'react-native';
 import { List, ListItem, Icon } from 'react-native-elements';
-import fakeEvents from '../testData';
 import { getEventsThunk } from '../reducers/events'
 
 

@@ -55,7 +55,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log('THIS IS THE STORE', this.state)
     return (
       <ScrollView contentContainerStyle={{ flex: 1, backgroundColor: 'transparent',}}>
         <View style={{ flex: 1, position: 'absolute', alignItems: 'center'

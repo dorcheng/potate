@@ -21,7 +21,6 @@ function snapshotListToArray(snapshots){
 export const getUsersThunk = () =>
 dispatch => {
   database.ref('users').on('value', (snapshot) => {
-    console.log('WHAT IS THIS USERS', snapshot)
     if(snapshot.val()) {
       dispatch(loadUsers(snapshotListToArray(snapshot)))
     } else {
